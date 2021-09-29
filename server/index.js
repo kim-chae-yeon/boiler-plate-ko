@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 // const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!!!')
 })
 
+app.get('/api/hello', (req, res) => {
+  res.send('안녕하세요~')
+})
+
 app.post('/api/users/register', (req, res) => {
 
   // 회원 가입할 때 필요한 정보들은 client에서 가져오면
@@ -46,6 +50,7 @@ app.post('/api/users/register', (req, res) => {
 
 app.post('/api/users/login', (req, res) => {
 
+  console.log('req.body', req.body)
   // 요청된 이메일이 데이터베이스에 있는지 찾는다.
   User.findOne({email: req.body.email}, (err, user) => {
     if(!user){
