@@ -1,7 +1,8 @@
-import Axios from 'axios'
-import React, { useState }from 'react'
-import {useDispatch} from 'react-redux';
-import {loginUser} from '../../../_actions/user_action';
+import axios from 'axios'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../../_actions/user_action';
+import { withRouter } from 'react-router-dom'
 
 function LoginPage(props) {
     const dispatch = useDispatch();
@@ -21,14 +22,15 @@ function LoginPage(props) {
         // 버튼을 누를 때 새로고침되는걸 방지 -> 안하면 아래 명령어를 안하고 새로고침만 함
         event.preventDefault();
 
+
         let body = {
             email: Email,
             password: Password
         }
+
         // dispatch: _actions/user_action.js
-        dispatch(loginUser(body))
-            .then(response => {
-            if (response.payload.loginSuccess){
+        dispatch(loginUser(body)).then(response => {
+            if (response.payload.loginSuccess) {
                 props.history.push('/')
             } else {
                 alert('Error')
@@ -36,10 +38,11 @@ function LoginPage(props) {
         })
     }
     return (
-        <div style={{ display:'flex', justifyContent: 'center', alignItems: 'center'
-        , width: '100%', height: '100vh'
+        <div style={{
+            display: 'flex', justifyContent: 'center', alignItems: 'center'
+            , width: '100%', height: '100vh'
         }}>
-            <form style={{display: 'flex', flexDirection: 'column'}} onSubmit={onSubmitHandler}>
+            <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={onSubmitHandler}>
                 <label>Email</label>
                 {/* value에 state 기입, onChange로 입력칸 기입 가능 */}
                 <input type="email" value={Email} onChange={onEmailHandler} />
@@ -54,4 +57,4 @@ function LoginPage(props) {
     )
 }
 
-export default LoginPage
+export default withRouter(LoginPage)

@@ -17,7 +17,7 @@ ReactDOM.render(
       // redux extension 연결
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__()
-      )}
+    )}
   >
     <App />
   </Provider>,
